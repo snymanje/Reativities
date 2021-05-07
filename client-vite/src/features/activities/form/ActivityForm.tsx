@@ -5,15 +5,16 @@ import { Activity } from "../../../app/models/activity";
 interface Props {
   activity: Activity | undefined;
   closeForm: () => void;
+  createOrEdit: (Activity: Activity) => void;
 }
 
-const ActivityForm = ({ activity: selectedActivity, closeForm }: Props) => {
+const ActivityForm = ({ activity: selectedActivity, closeForm, createOrEdit }: Props) => {
   const initialState = selectedActivity ?? {
     id: "",
     title: "",
     category: "",
     description: "",
-    date: new Date(),
+    date: "",
     city: "",
     venue: "",
   };
@@ -21,7 +22,7 @@ const ActivityForm = ({ activity: selectedActivity, closeForm }: Props) => {
   const [activity, setActivity] = useState(initialState);
 
   const handleSubmit = () => {
-    console.log(activity);
+    createOrEdit(activity);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
